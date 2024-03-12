@@ -26,10 +26,22 @@ Linting
 
 Usage
 -----
+To evaluate a function performance, import the module object as followed:
+
+```py
+from main.performance_assessor import PerformanceAssessor
+
+...
+```
+
+If you want to test what the module is doing, launch the following command:
+
 ```sh
     # Execute this command line in a conda environment.
-    $ python -m test.performance_assessor
+    $ python -m main.performance_assessor
 ```
+
+And check the result in the "data/" subdirectory.
 """
 
 __authors__ = ["Lucas ROUAUD"]
