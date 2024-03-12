@@ -8,19 +8,17 @@ Linting
 
 Usage
 -----
+When you are in the main directory ("performance_assessor/"), you can launch:
+
 ```sh
     # Execute this command line in a conda environment.
-    $ pytest test/functional_assessor.py
+    $ pytest
 ```
 """
 
 __authors__ = ["Lucas ROUAUD"]
 __contact__ = ["lucas.rouaud@gmail.com"]
 __copyright__ = "MIT License"
-
-# [S]
-from subprocess import run
-from sys import version
 
 # [P]
 import pytest
