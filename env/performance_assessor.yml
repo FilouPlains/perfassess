@@ -1,0 +1,9 @@
+name: performance_assessor
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - mamba=1.5.5=py311h3072747_0
+  - plotly=5.19.0=py311h92b7b1e_0
+  - pylint=2.16.2=py311h06a4308_0
+  - pytest=7.4.0=py311h06a4308_0
