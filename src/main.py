@@ -101,169 +101,6 @@ class PerformanceAssessor:
         self.__plot: "dict[go.Figure]" = {}
         self.n_field: int = n_field
 
-    def __set_plot(
-        self,
-        head: np.array,
-        label: np.array,
-        data: np.array,
-        foreground: str = "#2E2E3E",
-        background: str = "rgba(0, 0, 0, 0)"
-    ) -> go.Figure:
-        """Set a Plotly bar plot based on computed evaluation.
-
-        Parameters
-        ----------
-        head : `np.array`
-            The data header (like ncall). Or like one label per column.
-        label : `np.array`
-            The data label (like functions names). Or like one label per row.
-        data : `np.array`
-            The numerical data.
-        foreground : `str`, optional
-            The "foreground" color. By default "#2E2E3E".
-        background : `str`, optional
-            The "background" color. By default "rgba(0, 0, 0, 0)".
-
-        Returns
-        -------
-        go.Figure
-            The setted Plotly bar plot.
-        """
-        plot: object = go.Figure()
-
-        sort_i: np.array = np.flip(np.argsort(data.T[0]))
-
-        # Trace the barplot
-        plot.add_trace(go.Bar(
-            x=label[sort_i],
-            y=data.T[0][sort_i],
-            marker_line_color=foreground,
-            marker_color=foreground
-        ))
-
-        # Modify general plot properties.
-        plot.update_layout(
-            template="plotly_white",
-            margin={"r": 5},
-            font={"size": 32, "family": "Roboto Light"},
-            xaxis={
-                "title": f"<b>Tested function ({head[-1]})</b>",
-                "showline": True,
-                "linewidth": 1,
-                "showgrid": False,
-                "title_font": {"family": "Roboto Black"},
-                "tickfont": {"size": 16}
-            },
-            yaxis={
-                "title": f"<b>{head[0].capitalize()}</b>",
-                "showline": True,
-                "linewidth": 1,
-                "showgrid": False,
-                "title_font": {"family": "Roboto Black"},
-                "tickfont": {"size": 16}
-            },
-            title_font={"family": "Roboto Black"},
-            plot_bgcolor=background,
-            paper_bgcolor=background,
-        )
-
-        # Add the rectangle border.
-        plot.add_shape(
-            type="rect",
-            xref="paper",
-            yref="paper",
-            x0=0,
-            y0=0,
-            x1=1,
-            y1=1,
-            line={"width": 2, "color": foreground}
-        )
-
-        plot.update_traces()
-
-        # Adding the dropdown menu in the case of multiple datas.
-        if data.T.shape[0] != 1:
-            # Add the dropdown to the plot.
-            plot.update_layout(updatemenus=self.__add_dropdown(
-                foreground=foreground,
-                head=head,
-                label=label,
-                data=data
-            ))
-
-        return plot
-
-    def __add_dropdown(
-        self,
-        head: np.array,
-        label: np.array,
-        data: np.array,
-        foreground: str
-    ) -> list:
-        """Add a dropdown to the Plotly plot, in order to select different
-        assessed values.
-
-        Parameters
-        ----------
-        head : `np.array`
-            The data header (like ncall). Or like one label per column.
-        label : `np.array`
-            The data label (like functions names). Or like one label per row.
-        data : `np.array`
-            The numerical data.
-        foreground : `str`
-            The "foreground" color.
-
-        Returns
-        -------
-        `list`
-            The dropdown menu, which is a `update_menu`.
-        """
-        button: list = []
-
-        for i, label_i in enumerate(head[:-1]):
-            sort_i: np.array = np.flip(np.argsort(data.T[i]))
-
-            # Add a element in the dropdown. By selecting it, it will modify
-            # the plot.
-            button += [{
-                "method": "update",
-                "label": label_i,
-                "args": [
-                    # Restyling.
-                    {"x": [label[sort_i]], "y": [data.T[i][sort_i]]},
-                    # Updating.
-                    {"yaxis": {
-                        "showline": True,
-                        "linewidth": 1,
-                        "showgrid": False,
-                        "title": {
-                            "text": f"<b>{label_i.capitalize()}</b>",
-                            "font": {"family": "Roboto Black"}
-                        },
-                        "tickfont": {"size": 16}
-                    }}
-                ],
-            }]
-
-        # Create the dropdown menu.
-        update_menu: list = [{
-            "buttons": button,
-            "type": "dropdown",
-            "direction": "down",
-            "showactive": True,
-            "x": 1,
-            "xanchor": "right",
-            "y": 1.01,
-            "yanchor": "bottom",
-            "bgcolor": "#FFF",
-            "bordercolor": foreground,
-            "borderwidth": 2,
-            "font_color": foreground
-        }]
-
-        return update_menu
-
     def launch_profiling(
         self,
         do_memory: bool = True,
@@ -303,7 +140,7 @@ class PerformanceAssessor:
             # Get a traceback of memory usage.
             snapshot = tracemalloc.take_snapshot()
 
-            # Create the plot for assessing memory usage.
+            # Create the plot for evaluating memory usage.
             self.__memory_evaluation(stat_memory=snapshot.statistics("lineno"))
 
             # Stop to check memory usage.
@@ -312,6 +149,8 @@ class PerformanceAssessor:
         if do_time:
             # Stop to check time usage.
             profile.disable()
+
+            # Create the plot for evaluating memory usage.
             self.__time_evaluation(profile=profile)
 
     def __memory_evaluation(
@@ -442,6 +281,176 @@ class PerformanceAssessor:
                 include_plotlyjs="cdn",
                 full_html=False
             )
+
+    # pylint: disable=too-many-arguments, too-many-instance-attributes
+    # Special class that needs a lot of data to be set up. Using a dataclass
+    # would be unnecessary, as far as it would just simply take more memory
+    # for nothing.
+
+    def __set_plot(
+        self,
+        head: np.array,
+        label: np.array,
+        data: np.array,
+        foreground: str = "#2E2E3E",
+        background: str = "rgba(0, 0, 0, 0)"
+    ) -> go.Figure:
+        """Set a Plotly bar plot based on computed evaluation.
+
+        Parameters
+        ----------
+        head : `np.array`
+            The data header (like ncall). Or like one label per column.
+        label : `np.array`
+            The data label (like functions names). Or like one label per row.
+        data : `np.array`
+            The numerical data.
+        foreground : `str`, optional
+            The "foreground" color. By default "#2E2E3E".
+        background : `str`, optional
+            The "background" color. By default "rgba(0, 0, 0, 0)".
+
+        Returns
+        -------
+        go.Figure
+            The setted Plotly bar plot.
+        """
+        plot: object = go.Figure()
+
+        sort_i: np.array = np.flip(np.argsort(data.T[0]))
+
+        # Trace the barplot
+        plot.add_trace(go.Bar(
+            x=label[sort_i],
+            y=data.T[0][sort_i],
+            marker_line_color=foreground,
+            marker_color=foreground
+        ))
+
+        # Modify general plot properties.
+        plot.update_layout(
+            template="plotly_white",
+            margin={"r": 5},
+            font={"size": 32, "family": "Roboto Light"},
+            xaxis={
+                "title": f"<b>Tested function ({head[-1]})</b>",
+                "showline": True,
+                "linewidth": 1,
+                "showgrid": False,
+                "title_font": {"family": "Roboto Black"},
+                "tickfont": {"size": 16}
+            },
+            yaxis={
+                "title": f"<b>{head[0].capitalize()}</b>",
+                "showline": True,
+                "linewidth": 1,
+                "showgrid": False,
+                "title_font": {"family": "Roboto Black"},
+                "tickfont": {"size": 16}
+            },
+            title_font={"family": "Roboto Black"},
+            plot_bgcolor=background,
+            paper_bgcolor=background,
+        )
+
+        # Add the rectangle border.
+        plot.add_shape(
+            type="rect",
+            xref="paper",
+            yref="paper",
+            x0=0,
+            y0=0,
+            x1=1,
+            y1=1,
+            line={"width": 2, "color": foreground}
+        )
+
+        plot.update_traces()
+
+        # Adding the dropdown menu in the case of multiple datas.
+        if data.T.shape[0] != 1:
+            # Add the dropdown to the plot.
+            plot.update_layout(updatemenus=self.__add_dropdown(
+                foreground=foreground,
+                head=head,
+                label=label,
+                data=data
+            ))
+
+        return plot
+
+    # pylint: enable=too-many-arguments
+
+    def __add_dropdown(
+        self,
+        head: np.array,
+        label: np.array,
+        data: np.array,
+        foreground: str
+    ) -> list:
+        """Add a dropdown to the Plotly plot, in order to select different
+        assessed values.
+
+        Parameters
+        ----------
+        head : `np.array`
+            The data header (like ncall). Or like one label per column.
+        label : `np.array`
+            The data label (like functions names). Or like one label per row.
+        data : `np.array`
+            The numerical data.
+        foreground : `str`
+            The "foreground" color.
+
+        Returns
+        -------
+        `list`
+            The dropdown menu, which is a `update_menu`.
+        """
+        button: list = []
+
+        for i, label_i in enumerate(head[:-1]):
+            sort_i: np.array = np.flip(np.argsort(data.T[i]))
+
+            # Add a element in the dropdown. By selecting it, it will modify
+            # the plot.
+            button += [{
+                "method": "update",
+                "label": label_i,
+                "args": [
+                    # Restyling.
+                    {"x": [label[sort_i]], "y": [data.T[i][sort_i]]},
+                    # Updating.
+                    {"yaxis": {
+                        "showline": True,
+                        "linewidth": 1,
+                        "showgrid": False,
+                        "title": {
+                            "text": f"<b>{label_i.capitalize()}</b>",
+                            "font": {"family": "Roboto Black"}
+                        },
+                        "tickfont": {"size": 16}
+                    }}
+                ],
+            }]
+
+        # Create the dropdown menu.
+        update_menu: list = [{
+            "buttons": button,
+            "type": "dropdown",
+            "direction": "down",
+            "showactive": True,
+            "x": 1,
+            "xanchor": "right",
+            "y": 1.01,
+            "yanchor": "bottom",
+            "bgcolor": "#FFF",
+            "bordercolor": foreground,
+            "borderwidth": 2,
+            "font_color": foreground
+        }]
+
+        return update_menu
 
     def get_plot(self) -> dict:
         """Get the setted plot.
