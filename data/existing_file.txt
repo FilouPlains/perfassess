@@ -1,0 +1,2 @@
+To test if an error is thrown when choosing a file and not a directory, with
+pytest.

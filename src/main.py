@@ -257,43 +257,6 @@ class PerformanceAssessor:
             data=numeric_data
         )
 
-    def plot(
-        self,
-        path: str = "./"
-    ):
-        """Save the plot to a `.html` file.
-
-        Parameters
-        ----------
-        path : `str`, optional
-            The path to save the file, which have to be a directory. By default
-            "./".
-
-        Raises
-        ------
-        FileNotFoundError
-            If the input path does not exist.
-        ValueError
-            If the input path is not a directory.
-        """
-        if path.endswith("/"):
-            path = path[:-1]
-
-        if not exists(path):
-            raise FileNotFoundError(f"[Err##] Given path \"{path}\" does not "
-                                    "exist.")
-        if not isdir(path):
-            raise ValueError(f"[Err##] Given path  \"{path}\" is not "
-                             "directory.")
-
-        for key, plot_i in self.__plot.items():
-            # Save the plot.
-            plot_i.write_html(
-                file=f"{path}/{key}.html",
-                include_plotlyjs="cdn",
-                full_html=False
-            )
-
     # pylint: disable=too-many-arguments, too-many-instance-attributes
     # Special class that needs a lot of data to be set up. Using a dataclass
     # would be unnecessary, as far as it would just simply take more memory
@@ -463,6 +426,43 @@ class PerformanceAssessor:
         }]
 
         return update_menu
+
+    def plot(
+        self,
+        path: str = "./"
+    ):
+        """Save the plot to a `.html` file.
+
+        Parameters
+        ----------
+        path : `str`, optional
+            The path to save the file, which have to be a directory. By default
+            "./".
+
+        Raises
+        ------
+        FileNotFoundError
+            If the input path does not exist.
+        ValueError
+            If the input path is not a directory.
+        """
+        if path.endswith("/"):
+            path = path[:-1]
+
+        if not exists(path):
+            raise FileNotFoundError(f"[Err##] Given path \"{path}\" does not "
+                                    "exist.")
+        if not isdir(path):
+            raise ValueError(f"[Err##] Given path  \"{path}\" is not "
+                             "directory.")
+
+        for key, plot_i in self.__plot.items():
+            # Save the plot.
+            plot_i.write_html(
+                file=f"{path}/{key}.html",
+                include_plotlyjs=True,
+                full_html=True
+            )
 
     def get_plot(self) -> dict:
         """Get the setted plot.
