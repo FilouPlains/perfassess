@@ -46,10 +46,17 @@ def __assessor() -> PerformanceAssessor:
     `PerformanceAssessor`
         The class to test.
     """
-    return PerformanceAssessor(main=lambda: 10, n_field=1, value=[0] * 1000)
+    performance_assessor: PerformanceAssessor = PerformanceAssessor(
+        main=lambda: 10,
+        n_field=1
+    )
+
+    performance_assessor.launch_profiling()
+
+    return performance_assessor
 
 
-def test_plot_path_exists(__assessor: PerformanceAssessor):
+def test_plot_path_not_exists(__assessor: PerformanceAssessor):
     """Test if an error is thrown when a path that does not exist is given.
 
     Parameters
@@ -61,7 +68,7 @@ def test_plot_path_exists(__assessor: PerformanceAssessor):
         __assessor.plot("//not_a_directory")
 
 
-def test_plot_is_directory(__assessor: PerformanceAssessor):
+def test_plot_is_not_directory(__assessor: PerformanceAssessor):
     """Test if an error is thrown when a path pointing to something else than a
     file is given.
 
@@ -73,3 +80,15 @@ def test_plot_is_directory(__assessor: PerformanceAssessor):
     with pytest.raises(ValueError):
         __assessor.plot("data/existing_file.txt")
 
+
+def test_launch_no_profiling(__assessor: PerformanceAssessor):
+    """Test if an error is thrown when either `do_memory` and `do_time` are set
+    to `False`.
+
+    Parameters
+    ----------
+    __assessor : `PerformanceAssessor`
+        The class to test.
+    """
+    with pytest.raises(ValueError):
+        __assessor.launch_profiling(do_memory=False, do_time=False)
