@@ -106,7 +106,7 @@ def __file_errors(argument: object):
             raise FileNotFoundError("[Err##] In script, file "
                                     f"\"{argument.subpackage}\" does not "
                                     "exist.")
-        if not argument.subpackage.endswith("__script__.py"):
+        if not argument.subpackage.endswith("__init__.py"):
             raise ValueError("[Err##] In script, file "
                              f"\"{argument.subpackage}\" have to be a "
                              "\"__init__.py\" file.")

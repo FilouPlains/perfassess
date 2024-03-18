@@ -1,10 +1,4 @@
-r"""Test if "main.py" is functional.
-
-Linting
--------
-```sh
-    $ pylint test/
-```
+r"""Test if "src/main.py" is functional.
 
 Usage
 -----

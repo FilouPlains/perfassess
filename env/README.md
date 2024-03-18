@@ -31,9 +31,9 @@ $ conda activate performance_assessor
 
 ## Module list 📝
 
-| **Module**      | **Version** |
-| :-------------- | :---------: |
-| mamba           |   `1.5.5`   |
-| plotly          |  `5.19.0`   |
-| pylint          |  `2.16.2`   |
-| pytest          |   `7.4.0`   |
+| **Module** | **Version** |
+| :--------- | :---------: |
+| mamba      |   `1.5.5`   |
+| plotly     |  `5.19.0`   |
+| pylint     |  `2.16.2`   |
+| pytest     |   `7.4.0`   |
