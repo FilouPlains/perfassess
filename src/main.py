@@ -52,7 +52,7 @@ from typing import Callable
 # [C]
 from .class_performance_assessor import PerformanceAssessor
 # [P]
-from .parse_argument import parse_argument
+from .parse_argument.parse_argument import parse_argument
 
 
 def main(
@@ -85,7 +85,7 @@ def main(
 
 
 if __name__ == "__main__":
-    __argument = parse_argument()
+    __argument = parse_argument(version=__version__)
 
     main(
         function=__argument.function,
