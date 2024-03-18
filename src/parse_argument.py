@@ -20,6 +20,7 @@ from argparse import ArgumentParser, RawTextHelpFormatter
 # [Y]
 from yaml import safe_load
 
+
 def parse_argument(version: str = None) -> ArgumentParser:
     """Parse given arguments and tests them.
 
@@ -80,7 +81,7 @@ def parse_argument(version: str = None) -> ArgumentParser:
     usage is a bit different. Let us says that you have a package following
     next schema:
     
-    \033[7m [[subpackage USE]] \033[0m\n
+    \033[7m [[SUBPACKAGE USE]] \033[0m\n
     ./package/
     └── src/
         ├── __init__.py
@@ -92,7 +93,6 @@ def parse_argument(version: str = None) -> ArgumentParser:
     relatives import. To launch the function assessor on "script.py" do, if you
     are in ./package:
     
-    \033[7m [[PACKAGE USE]] \033[0m\n
     $ python -m src.main \\
              -s src/subpackage/script.py \\
              -f function_name \\
@@ -100,6 +100,8 @@ def parse_argument(version: str = None) -> ArgumentParser:
              --package src/__init__.py \\
              --subpackage src/subpackage/__init__.py \\
              -a argument.yml
+    
+    \033[7m [[PACKAGE USE]] \033[0m\n
     
     If you have no "subpackage", you do not need to provide anything for this
     parameter:
