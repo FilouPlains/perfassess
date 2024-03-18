@@ -1,4 +1,4 @@
-r"""Compute actually time and memory consumption.
+r"""Compute time and memory consumption.
 
 Details about cProfile output
 -----------------------------
@@ -26,22 +26,18 @@ Linting
 
 Usage
 -----
-To evaluate a function performance, import the module object as followed:
+You can launch the module as a command line. To know what is possible, launch:
+```sh
+$ python -m src.main --help
+```
+
+Else, to evaluate a function performance, import the module object as followed:
 
 ```py
 from main.performance_assessor import PerformanceAssessor
 
 ...
 ```
-
-If you want to test what the module is doing, launch the following command:
-
-```sh
-    # Execute this command line in a conda environment.
-    $ python -m main.performance_assessor
-```
-
-And check the result in the "data/" subdirectory.
 """
 
 __authors__ = ["Lucas ROUAUD"]
@@ -65,6 +61,19 @@ def main(
     output: str,
     argument: dict
 ):
+    """Main function.
+
+    Parameters
+    ----------
+    function : `Callable`
+        The function to evaluate.
+    n_field : `int`
+        Number of fields in the plot.
+    output : `str`
+        The output directory.
+    argument : `dict`
+        The argument to give to the function to test.
+    """
     assessor: PerformanceAssessor = PerformanceAssessor(
         main=function,
         n_field=n_field,

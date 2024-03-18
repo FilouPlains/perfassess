@@ -1,4 +1,4 @@
-r"""Compute actually time and memory consumption.
+r"""An object to compute time and memory consumption.
 
 Details about cProfile output
 -----------------------------
@@ -17,31 +17,6 @@ Details about cProfile output
 
 [Information get here](https://www.machinelearningplus.com/python/cprofile-how-
 to-profile-your-python-code/)
-
-Linting
--------
-```sh
-    $ pylint src/
-```
-
-Usage
------
-To evaluate a function performance, import the module object as followed:
-
-```py
-from main.performance_assessor import PerformanceAssessor
-
-...
-```
-
-If you want to test what the module is doing, launch the following command:
-
-```sh
-    # Execute this command line in a conda environment.
-    $ python -m main.performance_assessor
-```
-
-And check the result in the "data/" subdirectory.
 """
 
 __authors__ = ["Lucas ROUAUD"]

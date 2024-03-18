@@ -218,7 +218,7 @@ def parse_argument(version: str = None) -> ArgumentParser:
         dest="argument",
         required=False,
         default=None,
-        type=str,
+        type=None,
         metavar="[FILE][\".yml\"]",
         help=("    > A YAML file containing all argument for the function to "
               "test. By default None.")
@@ -406,7 +406,7 @@ def parse_argument(version: str = None) -> ArgumentParser:
     except KeyError as error:
         raise ValueError(f"[Err##] \"{argument.function}\" is not present "
                          "inside the given script "
-                         "\"{argument.script}\".") from error
+                         f"\"{argument.script}\".") from error
 
     # ====================
     #
@@ -416,7 +416,9 @@ def parse_argument(version: str = None) -> ArgumentParser:
     if argument.argument is not None:
         # Parsing user file.
         with open(argument.argument, "r", encoding="utf-8") as file:
-            argument.argument: dict = safe_load(file)
+            argument.argument = safe_load(file)
+    else:
+        argument.argument = {}
 
     return argument
 
