@@ -10,12 +10,15 @@ __copyright__ = "MIT License"
 from importlib.util import module_from_spec, spec_from_file_location
 # [O]
 from os.path import exists, isdir
+# [S]
+from sys import modules
 # [T]
 from textwrap import dedent
 
 # [A]
 from argparse import ArgumentParser, RawTextHelpFormatter
-
+# [Y]
+from yaml import safe_load
 
 def parse_argument(version: str = None) -> ArgumentParser:
     """Parse given arguments and tests them.
@@ -60,7 +63,12 @@ def parse_argument(version: str = None) -> ArgumentParser:
     Assess. is a program to assess the time execution of a given script in
     python. To use it, launch:
 
-    $ python -m src.main -s script.py -f function_name -o output_directory/
+    \033[7m [[NORMAL USE]] \033[0m\n
+    $ python -m src.main \\
+             -s script.py \\
+             -f function_name \\
+             -o output_directory/ \\
+             -a argument.yml
 
     Legend:
         - int: Integer.
@@ -72,10 +80,11 @@ def parse_argument(version: str = None) -> ArgumentParser:
     usage is a bit different. Let us says that you have a package following
     next schema:
     
+    \033[7m [[subpackage USE]] \033[0m\n
     ./package/
     └── src/
         ├── __init__.py
-        └── sub_package/
+        └── subpackage/
             ├── __init__.py
             └── script.py
     
@@ -83,14 +92,16 @@ def parse_argument(version: str = None) -> ArgumentParser:
     relatives import. To launch the function assessor on "script.py" do, if you
     are in ./package:
     
+    \033[7m [[PACKAGE USE]] \033[0m\n
     $ python -m src.main \\
-             -s src/sub_package/script.py \\
+             -s src/subpackage/script.py \\
              -f function_name \\
              -o output_directory/ \\
              --package src/__init__.py \\
-             --sub_package src/sub_package/__init__.py
+             --subpackage src/subpackage/__init__.py \\
+             -a argument.yml
     
-    If you have no "sub_package", you do not need to provide anything for this
+    If you have no "subpackage", you do not need to provide anything for this
     parameter:
     
     ./package/
@@ -102,7 +113,8 @@ def parse_argument(version: str = None) -> ArgumentParser:
              -s src/script.py \\
              -f function_name \\
              -o output_directory/ \\
-             --package src/__init__.py
+             --package src/__init__.py \\
+             -a argument.yml
     """
 
     # ===================
@@ -173,7 +185,7 @@ def parse_argument(version: str = None) -> ArgumentParser:
         "--n_field",
         dest="n_field",
         required=False,
-        default=9,
+        default=0,
         type=int,
         metavar="[int|9]",
         help=("    > The number of field to keep in function name. By default "
@@ -185,19 +197,31 @@ def parse_argument(version: str = None) -> ArgumentParser:
         dest="package",
         required=False,
         default=None,
-        type=int,
+        type=str,
         metavar="[FILE][\".py\"]",
         help="    > The path to an \"__init__.py\" package. By default None."
     )
 
     parser.add_argument(
-        "--sub_package",
-        dest="sub_package",
+        "--subpackage",
+        dest="subpackage",
         required=False,
         default=None,
-        type=int,
+        type=str,
         metavar="[FILE][\".py\"]",
         help="    > The path to an \"__init__.py\" subpackage. By default None."
+    )
+
+    parser.add_argument(
+        "-a",
+        "--argument",
+        dest="argument",
+        required=False,
+        default=None,
+        type=str,
+        metavar="[FILE][\".yml\"]",
+        help=("    > A YAML file containing all argument for the function to "
+              "test. By default None.")
     )
 
     argument: ArgumentParser = parser.parse_args()
@@ -214,7 +238,38 @@ def parse_argument(version: str = None) -> ArgumentParser:
                                 "does not exist.")
     if not argument.script.endswith(".py"):
         raise ValueError(f"[Err##] In script, file \"{argument.script}\" have "
-                         "not the extension \".pdb\".")
+                         "not the extension \".py\".")
+
+    # Input package errors.
+    if argument.package is not None:
+        if not exists(argument.package):
+            raise FileNotFoundError("[Err##] In script, file "
+                                    f"\"{argument.package}\" does not exist.")
+        if not argument.package.endswith("__init__.py"):
+            raise ValueError(f"[Err##] In script, file \"{argument.package}\" "
+                             "have to be a \"__init__.py\" file.")
+
+    # Input subpackage errors.
+    if argument.subpackage is not None:
+        if not exists(argument.subpackage):
+            raise FileNotFoundError("[Err##] In script, file "
+                                    f"\"{argument.subpackage}\" does not "
+                                    "exist.")
+        if not argument.subpackage.endswith("__script__.py"):
+            raise ValueError("[Err##] In script, file "
+                             f"\"{argument.subpackage}\" have to be a "
+                             "\"__init__.py\" file.")
+
+    # Input YAML errors.
+    if argument.argument is not None:
+        if not exists(argument.argument):
+            raise FileNotFoundError("[Err##] In script, file "
+                                    f"\"{argument.argument}\" does not "
+                                    "exist.")
+        if not argument.argument.endswith(".yml"):
+            raise ValueError("[Err##] In script, file "
+                             f"\"{argument.argument}\" have to be a "
+                             "\".yml\" file.")
 
     # Deleting potential "/" at directory end.
     if argument.output[-1] == "/":
@@ -228,54 +283,124 @@ def parse_argument(version: str = None) -> ArgumentParser:
         raise ValueError("[Err##] In output, the given path is not a "
                          "directory.")
 
-    if argument.n_field < 1:
+    if argument.n_field < 0:
         raise ValueError("[Err##] In n_filed, the value "
-                         f"\"{argument.n_field}\" should be greater or equal "
+                         f"\"{argument.n_field}\" should be greater strictly "
                          "to 0.")
 
-    if argument.package is None and argument.sub_package is None:
-
-    # import sys
-    # import os
-    # # Get the current script's directory
-    # current_dir = os.path.dirname(os.path.abspath(argument.script))# Get the parent directory by going one level up
-    # parent_dir = os.path.dirname(current_dir)# Add the parent directory to sys.path
-    # sys.path.append(parent_dir)
-    # sys.path.append(os.path.dirname(parent_dir))
-    # sys.path.append(current_dir)
-    # print(sys.path)
-
+    # =============
+    #
+    # SIMPLE SCRIPT
+    #
+    # =============
+    if argument.package is None and argument.subpackage is None:
+        # Load the function inside the module.
         module_spec = spec_from_file_location(
             name=argument.function,
             location=argument.script
         )
 
+        # "Prepare" the module.
         module = module_from_spec(spec=module_spec)
+
+        # "Launch" the module inside the python environment.
         module_spec.loader.exec_module(module=module)
+    # =======
+    #
+    # PACKAGE
+    #
+    # =======
+    elif argument.package is not None and argument.subpackage is None:
+        # Get the package name.
+        package_name: str = argument.package.split("/")[-2]
+        # Load the package.
+        package_spec = spec_from_file_location(package_name, argument.package)
 
-    # for i in module.__dict__.keys():
-    #     print(i, "\t", module.__dict__[i], "\n\n")
+        # "Prepare" the package.
+        package = module_from_spec(package_spec)
+        # Add the package to the modules dict.
+        modules[package_name] = package
 
-    import importlib.util
-    import sys
-    spec_1 = importlib.util.spec_from_file_location(
-        "phi_khi_propride", "/home/rouaud/Documents/performance_assessor/../phi_khi_propride/phi_khi_propride/__init__.py")
-    foo_1 = importlib.util.module_from_spec(spec_1)
-    sys.modules["phi_khi_propride"] = foo_1
-    print(foo_1.__dict__)
-    spec_1.loader.exec_module(foo_1)
+        # "Launch" the package.
+        package_spec.loader.exec_module(package)
 
-    # ../phi_khi_propride/phi_khi_propride/grid/property_strategy/class_pi_stacking.py
-    spec = importlib.util.spec_from_file_location(
-        "phi_khi_propride.grid.property_strategy.class_pi_stacking", argument.script)
-    foo = importlib.util.module_from_spec(spec)
-    sys.modules["phi_khi_propride.grid.toto"] = foo
-    print(foo.__dict__)
-    spec.loader.exec_module(foo)
-    foo.StrategyPiStacking()
+        # Set the module name.
+        module_name: list = []
 
-    exit()
+        for item in argument.script[:-3].split("/")[::-1]:
+            module_name += [item]
 
+            if item == package_name:
+                break
+
+        module_name: str = ".".join(module_name[::-1])
+
+        # Load the script inside the module.
+        module_spec = spec_from_file_location(module_name, argument.script)
+
+        # "Prepare" the script.
+        module = module_from_spec(module_spec)
+        # Add the script to the modules dict.
+        modules[package_name + ".None"] = module
+
+        # "Launch" the script.
+        module_spec.loader.exec_module(module)
+    # ==========
+    #
+    # SUBPACKAGE
+    #
+    # ==========
+    elif argument.package is not None and argument.subpackage is not None:
+        # Get the package name.
+        package_name: str = argument.package.split("/")[-2]
+        # Load the package.
+        package_spec = spec_from_file_location(package_name, argument.package)
+
+        # "Prepare" the package.
+        package = module_from_spec(package_spec)
+        # Add the package to the modules dict.
+        modules[package_name] = package
+
+        # "Launch" the package.
+        package_spec.loader.exec_module(package)
+
+        # Set the module name.
+        module_name: list = []
+
+        for item in argument.script[:-3].split("/")[::-1]:
+            module_name += [item]
+
+            if item == package_name:
+                break
+
+        module_name: str = ".".join(module_name[::-1])
+
+        # Set the subpackage name.
+        subpackage_name: list = []
+
+        for item in argument.subpackage[:-3].split("/")[::-1]:
+            subpackage_name += [item]
+
+            if item == package_name:
+                break
+
+        subpackage_name: str = ".".join(subpackage_name[::-1])
+
+        # Load the script inside the module.
+        module_spec = spec_from_file_location(module_name, argument.script)
+
+        # "Prepare" the script.
+        module = module_from_spec(module_spec)
+        # Add the script to the modules dict.
+        modules[subpackage_name] = module
+
+        # "Launch" the script.
+        module_spec.loader.exec_module(module)
+    else:
+        raise ValueError("[Err##] If --subpackage is specified, --package "
+                         "must be specified too.")
+
+    # Check if the function exists inside the module/package/subpackage.
     try:
         argument.function = module.__dict__[argument.function]
     except KeyError as error:
@@ -283,13 +408,25 @@ def parse_argument(version: str = None) -> ArgumentParser:
                          "inside the given script "
                          "\"{argument.script}\".") from error
 
+    # ====================
+    #
+    # PARSING THE YML FILE
+    #
+    # ====================
+    if argument.argument is not None:
+        # Parsing user file.
+        with open(argument.argument, "r", encoding="utf-8") as file:
+            argument.argument: dict = safe_load(file)
+
     return argument
 
 
 if __name__ == "__main__":
-
     __argument: ArgumentParser = parse_argument()
 
     print(f"{__argument.function=}")
     print(f"{__argument.script=}")
     print(f"{__argument.output=}")
+    print(f"{__argument.argument=}")
+    print(f"{__argument.package=}")
+    print(f"{__argument.subpackage=}")
