@@ -173,9 +173,9 @@ def define_argument(version: str = None) -> ArgumentParser:
         required=False,
         default=0,
         type=int,
-        metavar="[int|9]",
+        metavar="[int|0]",
         help=("    > The number of field to keep in function name. By default "
-              "9.")
+              "0.")
     )
 
     parser.add_argument(

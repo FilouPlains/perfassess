@@ -1,0 +1,36 @@
+iframe {
+    border: none;
+    width: 100%;
+    height: 20cm;
+}
+
+body {
+    font-family: "Roboto Light", "Segoe UI Light", sans-serif;
+}
+
+strong,
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6,
+label.md-nav__title,
+b {
+    font-family: "Roboto Slab", "Segoe UI", sans-serif;
+    font-weight: 1000;
+    color: black;
+}
+
+
+div.md-sidebar__inner {
+    background-color: var(--md-code-bg-color);
+    border-radius: .1rem;
+    padding: 10px;
+}
+
+.md-nav--primary .md-nav__title,
+.md-nav--secondary .md-nav__title {
+    box-shadow: none;
+    background: none;
+}

@@ -12,9 +12,28 @@ nav:
 
 repo_url: https://github.com/FilouPlains/performance_assessor
 
+markdown_extensions:
+    - nl2br
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+
 plugins:
     - search
     - mkdocstrings
+    - callouts
 
 theme:
-    name: readthedocs
+    name: material
+    palette:
+        primary: red
+        scheme: default
+    highlightjs: true
+    hljs_languages:
+        - bash
+        - python
+    font:
+        text: Roboto Light
+
+extra_css:
+    - style.css

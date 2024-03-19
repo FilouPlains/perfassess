@@ -151,7 +151,9 @@ class PerformanceAssessor:
             key: str = str(stat).split()[0]
 
             if self.__n_field > 0:
-                key = key.split(sep="/", maxsplit=self.__n_field + 1)[-1]
+                key = key.split(sep="/")
+                key = key[len(key) - self.__n_field:]
+                key = "/".join(key)
 
             if key not in stat_dict:
                 stat_dict[key] = 0
@@ -292,14 +294,14 @@ class PerformanceAssessor:
         plot.update_layout(
             template="plotly_white",
             margin={"r": 5},
-            font={"size": 32, "family": "Roboto Light"},
+            font={"size": 12, "family": "Roboto Light"},
             xaxis={
                 "title": f"<b>Tested function ({head[-1]})</b>",
                 "showline": True,
                 "linewidth": 1,
                 "showgrid": False,
                 "title_font": {"family": "Roboto Black"},
-                "tickfont": {"size": 16}
+                "tickfont": {"size": 12}
             },
             yaxis={
                 "title": f"<b>{head[0].capitalize()}</b>",
@@ -307,7 +309,7 @@ class PerformanceAssessor:
                 "linewidth": 1,
                 "showgrid": False,
                 "title_font": {"family": "Roboto Black"},
-                "tickfont": {"size": 16}
+                "tickfont": {"size": 12}
             },
             title_font={"family": "Roboto Black"},
             plot_bgcolor=background,
@@ -393,7 +395,7 @@ class PerformanceAssessor:
                             "text": f"<b>{label_i.capitalize()}</b>",
                             "font": {"family": "Roboto Black"}
                         },
-                        "tickfont": {"size": 16}
+                        "tickfont": {"size": 12}
                     }}
                 ],
             }]
