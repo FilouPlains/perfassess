@@ -15,4 +15,3 @@ repo_url: https://github.com/FilouPlains/performance_assessor
 plugins: 
     - search
     - mkdocstrings
-
