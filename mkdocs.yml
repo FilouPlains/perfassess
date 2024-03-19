@@ -12,6 +12,9 @@ nav:
 
 repo_url: https://github.com/FilouPlains/performance_assessor
 
-plugins: 
+plugins:
     - search
     - mkdocstrings
+
+theme:
+    name: readthedocs
