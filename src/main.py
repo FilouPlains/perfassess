@@ -1,27 +1,9 @@
 r"""Compute time and memory consumption.
 
-Details about cProfile output
------------------------------
-
-|     Value     | Description                                              |
-| :-----------: | :------------------------------------------------------- |
-| **`ncalls`**  | Shows the number of calls made.                          |
-| **`tottime`** | Total time taken by the given function. The time made in |
-|               | calls to sub-functions are excluded.                     |
-| **`percall`** | Total time per numbers of calls.                         |
-| **`cumtime`** | Like `tottime`, but includes time spent in all called    |
-|               | subfunctions.                                            |
-| **`percall`** | Quotient of `cumtime` divided by primitive calls. The    |
-|               | primitive calls include all calls not included through   |
-|               | recursion.                                               |
-
-[Information get here](https://www.machinelearningplus.com/python/cprofile-how-
-to-profile-your-python-code/)
-
 Linting
 -------
 ```sh
-    $ pylint src/
+$ pylint src/
 ```
 
 Usage
@@ -34,7 +16,7 @@ $ python -m src.main --help
 Else, to evaluate a function performance, import the module object as followed:
 
 ```py
-from main.performance_assessor import PerformanceAssessor
+from src.performance_assessor import PerformanceAssessor
 
 ...
 ```
@@ -67,10 +49,13 @@ def main(
     ----------
     function : `Callable`
         The function to evaluate.
+
     n_field : `int`
         Number of fields in the plot.
+
     output : `str`
         The output directory.
+
     argument : `dict`
         The argument to give to the function to test.
     """

@@ -60,26 +60,37 @@ def __file_errors(argument: object):
     ------
     `FileNotFoundError`
         If the script file is not found.
+
     `ValueError`
         If the script file have not a ".py" extension.
+
     `FileNotFoundError`
         If the package file is not found.
+
     `ValueError`
         If the package file is not a "__init__.py" one.
+
     `FileNotFoundError`
         If the subpackage file is not found.
+
     `ValueError`
         If the package file is not a "__init__.py" one.
+
     `ValueError`
         If the package file is not a "__init__.py" one.
+
     `FileNotFoundError`
         If the YAML file is not found.
+
     `ValueError`
         If the YAML file have not a ".yml" extension.
+
     `FileNotFoundError`
         If the directory is not found.
+
     `ValueError`
         If the path given is not a directory.
+
     `ValueError`
         If a number of negative file is given.
     """
@@ -159,6 +170,7 @@ def __module_importation_error(argument: object) -> object:
     ------
     `ValueError`
         If subpackage is filled, package must be given too.
+
     `ValueError`
         The given function name is not found in the given module.
     """

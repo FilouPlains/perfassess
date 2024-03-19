@@ -13,6 +13,7 @@ def testor(value: list, to_add: int = 1):
     ----------
     value : `list`
         A list of values.
+
     to_add : `int`, optional
         An optional argument to test them. By default 1.
     """

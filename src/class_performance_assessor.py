@@ -1,22 +1,4 @@
 r"""An object to compute time and memory consumption.
-
-Details about cProfile output
------------------------------
-
-|     Value     | Description                                              |
-| :-----------: | :------------------------------------------------------- |
-| **`ncalls`**  | Shows the number of calls made.                          |
-| **`tottime`** | Total time taken by the given function. The time made in |
-|               | calls to sub-functions are excluded.                     |
-| **`percall`** | Total time per numbers of calls.                         |
-| **`cumtime`** | Like `tottime`, but includes time spent in all called    |
-|               | subfunctions.                                            |
-| **`percall`** | Quotient of `cumtime` divided by primitive calls. The    |
-|               | primitive calls include all calls not included through   |
-|               | recursion.                                               |
-
-[Information get here](https://www.machinelearningplus.com/python/cprofile-how-
-to-profile-your-python-code/)
 """
 
 __authors__ = ["Lucas ROUAUD"]
@@ -61,28 +43,36 @@ class PerformanceAssessor:
         ----------
         main : `Callable`
             The function to access.
+
         n_field : `int`, optional
             The number of field to keep in function name. By default 9.
 
             Let us say that we have a function named like this:
 
-            >>> /home/user/Document/some_function.py:000(function_name)
+            ```sh
+            /home/user/Document/some_function.py:000(function_name)
+            ```
 
             If input we 2, we will have something like this:
 
-            >>> Document/some_function.py:000(function_name)
+            ```sh
+            Document/some_function.py:000(function_name)
+            ```
 
             We split at each "/" and keep the last two field.
+
         kwargs
             All possible arguments for the function to test.
 
         Example
         -------
-        >>> assessor: PerformanceAssessor = PerformanceAssessor(
-        >>>     main=function_to_test,
-        >>>     n_field=1,
-        >>>     argument_for_function_to_test="some_value"
-        >>> )
+        ```py
+        assessor: PerformanceAssessor = PerformanceAssessor(
+            main=function_to_test,
+            n_field=1,
+            argument_for_function_to_test="some_value"
+        )
+        ```
         """
         self.__assessed_function: Callable = main
         self.__function_argument: dict = dict(kwargs)
@@ -101,12 +91,13 @@ class PerformanceAssessor:
         ----------
         do_memory : `bool`, optional
             Do the memory evaluation. By default True.
+
         do_time : `bool`, optional
             Do the time evaluation. By default True.
 
         Raises
         ------
-        ValueError
+        `ValueError`
             When both `do_memory` and `do_time` are set to `False`.
         """
         if not do_memory and not do_time:
@@ -267,12 +258,16 @@ class PerformanceAssessor:
         ----------
         head : `np.array`
             The data header (like ncall). Or like one label per column.
+
         label : `np.array`
             The data label (like functions names). Or like one label per row.
+
         data : `np.array`
             The numerical data.
+
         foreground : `str`, optional
             The "foreground" color. By default "#2E2E3E".
+
         background : `str`, optional
             The "background" color. By default "rgba(0, 0, 0, 0)".
 
@@ -361,10 +356,13 @@ class PerformanceAssessor:
         ----------
         head : `np.array`
             The data header (like ncall). Or like one label per column.
+
         label : `np.array`
             The data label (like functions names). Or like one label per row.
+
         data : `np.array`
             The numerical data.
+
         foreground : `str`
             The "foreground" color.
 
@@ -432,9 +430,10 @@ class PerformanceAssessor:
 
         Raises
         ------
-        FileNotFoundError
+        `FileNotFoundError`
             If the input path does not exist.
-        ValueError
+
+        `ValueError`
             If the input path is not a directory.
         """
         if path.endswith("/"):

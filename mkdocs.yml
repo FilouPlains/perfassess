@@ -1,0 +1,18 @@
+site_name: performance_assessor
+
+nav:
+    - Home: index.md
+    - parse_argument:
+          - check_argument.py: parse_argument/check_argument.md
+          - define_argument.py: parse_argument/define_argument.md
+          - parse_argument.py: parse_argument/parse_argument.md
+    - class_performance_assessor.py: class_performance_assessor.md
+    - main.py: main.md
+    - testor.py: testor.md
+
+repo_url: https://github.com/FilouPlains/performance_assessor
+
+plugins: 
+    - search
+    - mkdocstrings
+

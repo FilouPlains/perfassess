@@ -45,16 +45,22 @@ class ArgumentParserSimulator:
         ----------
         script : `str`
             The script path.
+
         output : `str`
             The directory to output results.
+
         function : `str`
             The function to assess.
+
         n_field : `int`
             The number of field to keep.
+
         package : `str`
             A package path.
+
         subpackage : `str`
             A subpackage path.
+
         argument : `str`
             A YAML file path.
         """
@@ -131,6 +137,7 @@ def test_file_not_found(__argument: dataclass, parameter: dict):
     ----------
     __argument : `dataclass`
         The class that simulates input argument.
+
     parameter : `dict`
         The tested wrong file path.
     """
@@ -169,6 +176,7 @@ def test_value_error(__argument: dataclass, parameter: dict):
     ----------
     __argument : `dataclass`
         The class that simulates input argument.
+
     parameter : `dict`
         The tested wrong values.
     """
