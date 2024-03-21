@@ -194,3 +194,27 @@ def test_value_error(__argument: dataclass, parameter: dict):
 
     # Give back good parameter.
     __argument.redefine_parameter(**parameter)
+
+
+@pytest.mark.parametrize(
+    "parameter",
+    [
+        {"function": "none"}
+    ]
+)
+def test_module_error(__argument: dataclass, parameter: dict):
+    """Test if an error is thrown when a non-existing function is given.
+
+    Parameters
+    ----------
+    __argument : `dataclass`
+        The class that simulates input argument.
+
+    parameter : `dict`
+        The tested wrong function name.
+    """
+    __argument.redefine_parameter(**parameter)
+
+    # Test the error.
+    with pytest.raises(ValueError):
+        check_argument(__argument)
