@@ -31,9 +31,18 @@ $ conda activate performance_assessor
 
 ## Module list 📝
 
-| **Module** | **Version** |
-| :--------- | :---------: |
-| mamba      |   `1.5.5`   |
-| plotly     |  `5.19.0`   |
-| pylint     |  `2.16.2`   |
-| pytest     |   `7.4.0`   |
+| **Module**                          | **Version** |
+| :---------------------------------- | :---------: |
+| mamba                               |   `1.5.5`   |
+| plotly                              |  `5.19.0`   |
+| pylint                              |  `2.16.2`   |
+| pytest                              |   `7.4.0`   |
+| **pip:** ipython                    |  `8.22.2`   |
+| **pip:** markdown                   |   `3.5.2`   |
+| **pip:** mkdocs                     |   `1.5.3`   |
+| **pip:** mkdocs-autorefs            |   `1.0.1`   |
+| **pip:** mkdocs-callouts            |  `1.13.2`   |
+| **pip:** mkdocs-material            |  `9.5.14`   |
+| **pip:** mkdocs-material-extensions |   `1.3.1`   |
+| **pip:** mkdocstrings               |  `0.24.1`   |
+| **pip:** mkdocstrings-python        |   `1.9.0`   |
