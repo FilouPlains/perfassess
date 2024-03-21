@@ -7,7 +7,7 @@ if __name__ == "__main__":
         long_description = file.read()
 
     setup(
-        name="performance_assessor",
+        name="perfassess",
         version="0.0.1",
         description=("Access the performance of a given function and create"
                      "plot."),
@@ -15,7 +15,7 @@ if __name__ == "__main__":
         packages=find_packages(where="src"),
         long_description=long_description,
         long_description_content_type="text/markdown",
-        url="https://github.com/FilouPlains/performance_assessor",
+        url="https://github.com/FilouPlains/perfassess",
         author="FilouPlains",
         author_email="lucas.rouaud@gmail.com",
         license="MIT",

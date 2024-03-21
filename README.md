@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⌛️ PERFORMANCE_ASSESSOR 💾
+# ⌛️ PERFASSESS 💾
 
 [![Python 3.10.8](https://img.shields.io/badge/python-%E2%89%A5_3.11.5-blue.svg)](https://www.python.org/downloads/release/python-397/)
 [![Conda 22.11.1](https://img.shields.io/badge/miniconda-%E2%89%A5_23.11.0-green.svg)](https://docs.conda.io/en/latest/miniconda.html)
