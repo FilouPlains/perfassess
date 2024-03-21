@@ -70,7 +70,8 @@ $ python -m src.main \\
          -a argument.yml
 ```
 
-Note that packages are identify with "__init__.py" files and allow relatives import.
+!!! note
+    Packages are identify with `__init__.py` files and allow relatives import.
 
 ### Subpackage use
 
@@ -99,4 +100,4 @@ $ python -m src.main \\
 ```
 
 !!! note
-    Packages are identify with "__init__.py" files and allow relatives import.
+    Packages are identify with `__init__.py` files and allow relatives import.

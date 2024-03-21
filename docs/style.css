@@ -22,6 +22,18 @@ b {
     color: black;
 }
 
+.md-search-result .md-typeset h1,
+.md-search-result .md-typeset h2,
+.md-search-result .md-typeset h3,
+.md-search-result .md-typeset h4,
+.md-search-result .md-typeset h5,
+.md-search-result .md-typeset h6,
+.md-header__ellipsis .md-ellipsis,
+.md-source__repository.md-source__repository--active {
+    font-family: "Roboto Slab", "Segoe UI", sans-serif;
+    font-weight: 1000;
+}
+
 
 div.md-sidebar__inner {
     background-color: var(--md-code-bg-color);
