@@ -45,7 +45,7 @@ def define_argument(version: str = None) -> ArgumentParser:
 
     # Description of the program given when the help is cast.
     description: str = """
-    Assess. is a program to assess the time execution of a given script in
+    "Assess." is a program to assess the time execution of a given script in
     python. To use it, launch:
 
     \033[7m [[NORMAL USE]] \033[0m\n
@@ -54,18 +54,34 @@ def define_argument(version: str = None) -> ArgumentParser:
              -f function_name \\
              -o output_directory/ \\
              -a argument.yml
-
-    Legend:
-        - int: Integer.
-        - [type|value]: Type of the input required, follow by the default
-                        value. So if this optional arguments is not used,
-                        "value" will be chosen.
-
-    If you use this module to test another or, in another words, a package, the
-    usage is a bit different. Let us says that you have a package following
-    next schema:
     
+    \033[7m [[PACKAGE USE]] \033[0m\n
+    
+    If you use this module to test another or, in another words, a package, the
+    usage is a bit different. If you have no "subpackage", you have to launch,
+    for this kind of tree structure:
+    
+    ./package/
+    └── src/
+        ├── __init__.py
+        └── script.py
+    
+    The next command, if you are in "./package", in order to evaluate
+    "script.py":
+    
+    $ python -m src.main \\
+             -s src/script.py \\
+             -f function_name \\
+             -o output_directory/ \\
+             --package src/__init__.py \\
+             -a argument.yml
+
     \033[7m [[SUBPACKAGE USE]] \033[0m\n
+    
+    If you use this module to test another or, in another words, a package, the
+    usage is a bit different. If you have to test a "subpackage", you have to
+    launch, for this kind of tree structure:
+    
     ./package/
     └── src/
         ├── __init__.py
@@ -73,9 +89,8 @@ def define_argument(version: str = None) -> ArgumentParser:
             ├── __init__.py
             └── script.py
     
-    Note that packages are identify with "__init__.py" files and allow
-    relatives import. To launch the function assessor on "script.py" do, if you
-    are in ./package:
+    The next command, if you are in "./package", in order to evaluate
+    "script.py":
     
     $ python -m src.main \\
              -s src/subpackage/script.py \\
@@ -84,23 +99,15 @@ def define_argument(version: str = None) -> ArgumentParser:
              --package src/__init__.py \\
              --subpackage src/subpackage/__init__.py \\
              -a argument.yml
-    
-    \033[7m [[PACKAGE USE]] \033[0m\n
-    
-    If you have no "subpackage", you do not need to provide anything for this
-    parameter:
-    
-    ./package/
-    └── src/
-        ├── __init__.py
-        └── script.py
-    
-    $ python -m src.main \\
-             -s src/script.py \\
-             -f function_name \\
-             -o output_directory/ \\
-             --package src/__init__.py \\
-             -a argument.yml
+
+    \033[7m [[PARAMETERS DESCRIPTION]] \033[0m\n
+
+    Legend:
+        - int: Integer.
+        - str: String.
+        - [type|value]: Type of the input required, follow by the default
+                        value. So if this optional arguments is not used,
+                        "value" will be chosen.
     """
 
     # ===================
@@ -152,7 +159,7 @@ def define_argument(version: str = None) -> ArgumentParser:
         "--version",
         action="version",
         version=f"Program version is {version}",
-        help="    > Display the program's version, then exit the program."
+        help="    > Display the program's version, then exit the\nprogram."
     )
 
     parser.add_argument(
@@ -163,8 +170,8 @@ def define_argument(version: str = None) -> ArgumentParser:
         default="main",
         type=str,
         metavar="[str|main]",
-        help=("    > The entry point to assess a script. It have to be the "
-              "name of a function. By default, \"main\"")
+        help=("    > The entry point to assess a script. It have to be\nthe "
+              "name of a function. By default, \"main\".")
     )
 
     parser.add_argument(
@@ -174,8 +181,8 @@ def define_argument(version: str = None) -> ArgumentParser:
         default=0,
         type=int,
         metavar="[int|0]",
-        help=("    > The number of field to keep in function name. By default "
-              "0.")
+        help=("    > The number of field to keep in function name. "
+              "By\ndefault 0.")
     )
 
     parser.add_argument(
@@ -185,7 +192,7 @@ def define_argument(version: str = None) -> ArgumentParser:
         default=None,
         type=str,
         metavar="[FILE][\".py\"]",
-        help="    > The path to an \"__init__.py\" package. By default None."
+        help="    > The path to an \"__init__.py\" package. By default\nNone."
     )
 
     parser.add_argument(
@@ -195,7 +202,8 @@ def define_argument(version: str = None) -> ArgumentParser:
         default=None,
         type=str,
         metavar="[FILE][\".py\"]",
-        help="    > The path to an \"__init__.py\" subpackage. By default None."
+        help=("    > The path to an \"__init__.py\" subpackage. By\ndefault "
+              "None.")
     )
 
     parser.add_argument(
@@ -206,7 +214,7 @@ def define_argument(version: str = None) -> ArgumentParser:
         default=None,
         type=None,
         metavar="[FILE][\".yml\"]",
-        help=("    > A YAML file containing all argument for the function to "
+        help=("    > A YAML file containing all argument for the\nfunction to "
               "test. By default None.")
     )
 
