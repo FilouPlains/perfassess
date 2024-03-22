@@ -1,4 +1,4 @@
-r"""Test if "src/parse_argument/check_argument.py" is functional.
+r"""Test if "src/perfassess/parse_argument/check_argument.py" is functional.
 
 Usage
 -----
@@ -21,7 +21,7 @@ from dataclasses import dataclass
 import pytest
 
 # [S]
-from src.parse_argument.check_argument import check_argument
+from src.perfassess.parse_argument.check_argument import check_argument
 
 
 @dataclass
@@ -110,12 +110,12 @@ def __argument() -> dataclass:
         The class to test.
     """
     return ArgumentParserSimulator(
-        script="src/main.py",
+        script="src/perfassess/main.py",
         output="data/",
         function="main",
         n_field=0,
-        package="src/__init__.py",
-        subpackage="src/__init__.py",
+        package="src/perfassess/__init__.py",
+        subpackage="src/perfassess/__init__.py",
         argument="data/argument.yml"
     )
 
@@ -166,7 +166,7 @@ def test_file_not_found(__argument: dataclass, parameter: dict):
         {"n_field": -1},
         {"package": "data/argument.yml"},
         {"subpackage": "data/argument.yml"},
-        {"argument": "src/main.py"}
+        {"argument": "src/perfassess/main.py"}
     ]
 )
 def test_value_error(__argument: dataclass, parameter: dict):

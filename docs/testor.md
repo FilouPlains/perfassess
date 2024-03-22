@@ -1,3 +1,0 @@
-# testor.py
-
-::: src.testor

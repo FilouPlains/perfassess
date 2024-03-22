@@ -18,7 +18,7 @@ __copyright__ = "MIT License"
 import pytest
 
 # [P]
-from src.main import PerformanceAssessor
+from src.perfassess.main import PerformanceAssessor
 
 
 # =========================================

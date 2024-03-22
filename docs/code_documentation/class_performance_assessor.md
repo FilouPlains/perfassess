@@ -14,4 +14,4 @@ Information was collected here: [https://www.machinelearningplus.com/python/cpro
 to-profile-your-python-code/](https://www.machinelearningplus.com/python/cprofile-how-
 to-profile-your-python-code/)
 
-::: src.class_performance_assessor
+::: src.perfassess.class_performance_assessor

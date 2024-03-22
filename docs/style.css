@@ -46,3 +46,7 @@ div.md-sidebar__inner {
     box-shadow: none;
     background: none;
 }
+
+div#to-center {
+    text-align: center;
+}

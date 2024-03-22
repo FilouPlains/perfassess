@@ -13,7 +13,8 @@
 
 ## 📒 Description
 
-**This module permit to access the performance of a given function and create Plotly bar plot.**
+**This module permit to evaluate the performance of a given function and create Plotly bar plot.**
+
 
 
 ## ⚙️ Installation
@@ -24,50 +25,119 @@
 You can clone the repository using `HTTPS`:
 
 ```bash
-$ git clone https://github.com/FilouPlains/performance_assessor.git
+$ git clone https://github.com/FilouPlains/perfassess.git
 ```
 
 or using `SSH`:
 
 ```bash
-$ git clone git@github.com:FilouPlains/performance_assessor.git
+$ git clone git@github.com:FilouPlains/perfassess.git
 ```
 
-Then go the the `📁 performance_assessor/` directory:
+Then go to the `📁 perfassess/` directory:
 
 ```bash
-$ cd performance_assessor
+$ cd perfassess
 ```
 
-**All next commands are assuming that you are in the `📁 performance_assessor/` directory. This directory will be name as `📁 ./`.**
+**All next commands are assuming that you are in the `📁 perfassess/` directory. This directory will be name as `📁 ./`.**
 
+### 🐍📦 Installing with pip
 
-### 🐍📦 Installing conda
-
-First, you need to install conda to use this software. All information to installed conda are listed here: https://docs.anaconda.com/free/miniconda/index.html#quick-command-line-install
-
-### 🐍⚡️ Installing mamba
-
-Mamba is a fast packages installer. If it is not yet installed, do:
+Simply launch this command in the `📁 ./` directory:
 
 ```bash
-$ conda activate base
-$ conda install conda-forge::mamba
-```
-
-### ⛰ Installing the environment
-
-To use the software, you need to set the environment. To do so, launch in the terminal the following command:
-
-```bash
-$ # If not already done:
-$ conda activate base
-$ # Actual environment creation:
-$ mamba env create --file env/performance_assessor.yml
-$ conda activate performance_assessor
+$ python3 -m pip install .
 ```
 
 **You are now able to launch the program!**
+
+
+## ⌨️ Using command line
+
+### ✏️ General note
+
+By doing:
+
+```sh
+$ python -m src.main --help
+```
+
+You will get the help to use the command line interface. Here are the used legends:
+
+- **`int`:** Integer.
+- **`str`:** String.
+- **`[type|value]`:** Type of the input required, follow by the default value. So if this optional arguments is not used, “value” will be chosen.
+
+> ⚠️ If you use `pickle`, the command line interface will not work!
+
+
+### 📄 Normal use
+
+To use th program, launch:
+
+```sh
+$ perfassess -s script.py \\
+             -f function_name \\
+             -o output_directory/ \\
+             -a argument.yml
+```
+
+### 📁 Package use
+
+
+If you use this module to test another or, in another words, a package, the usage is a bit different. If you have no “subpackage”, you have to launch, for this kind of tree structure:
+
+```sh
+./package/
+└── src/
+    ├── __init__.py
+    └── script.py
+```
+
+The next command, if you are in `./package`, in order to evaluate `script.py`:
+
+```sh
+$ perfassess -s src/script.py \\
+             -f function_name \\
+             -o output_directory/ \\
+             --package src/__init__.py \\
+             -a argument.yml
+```
+
+> **Note 📝**
+> 
+> Packages are identify with `__init__.py` files and allow relatives import.
+
+### 🗂 Subpackage use
+
+If you use this module to test another or, in another words, a package, the usage is a bit different. If you have to test a “subpackage”, you have to launch, for this kind of tree structure:
+
+```sh
+./package/
+└── src/
+    ├── __init__.py
+    └── subpackage/
+        ├── __init__.py
+        └── script.py
+```
+
+The next command, if you are in `./package`, in order to evaluate `script.py`:
+
+
+```sh
+$ perfassess -s src/subpackage/script.py \\
+             -f function_name \\
+             -o output_directory/ \\
+             --package src/__init__.py \\
+             --subpackage src/subpackage/__init__.py \\
+             -a argument.yml
+```
+
+> **Note 📝**
+> 
+> Packages are identify with `__init__.py` files and allow relatives import.
+
 
 
 _This work is licensed under a [MIT License](https://opensource.org/licenses/MIT)._
