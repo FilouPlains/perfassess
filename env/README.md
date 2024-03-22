@@ -45,6 +45,7 @@ $ python -m pip install -r requirements.txt
 | plotly                              |  `5.19.0`   |
 | pylint                              |  `2.16.2`   |
 | pytest                              |   `7.4.0`   |
+| numpy                               |  `1.26.0`   |
 | **pip:** ipython                    |  `8.22.2`   |
 | **pip:** markdown                   |   `3.5.2`   |
 | **pip:** mkdocs                     |   `1.5.3`   |
