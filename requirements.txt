@@ -1,0 +1,13 @@
+python
+plotly
+ipython
+markdown
+mkdocs
+mkdocs-autorefs
+mkdocs-callouts
+mkdocs-material
+mkdocs-material-extensions
+mkdocstrings
+mkdocstrings-python
+pylint
+pytest
