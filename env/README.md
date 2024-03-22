@@ -7,9 +7,9 @@
 
 First, you need to install conda to use this software. All information to installed conda are listed here: https://docs.anaconda.com/free/miniconda/index.html#quick-command-line-install
 
-## 📶 Installing the environment
+**All next commands are to used when you are in the `📁 env/` directory:**
 
-**Those next commands are to used when you are in the `📁 env/` directory:**
+## 📶 Installing the environment with conda
 
 ### 🐍⚡️ Installing mamba
 
@@ -22,11 +22,19 @@ $ conda install conda-forge::mamba
 
 ### ⛰ Installing the environment
 
-To use the software, you need to set the environment. To do so, launch in the terminal the following command:
+To set the environment, launch in the terminal the following command:
 
 ```bash
 $ mamba env create --file performance_assessor.yml
 $ conda activate performance_assessor
+```
+
+## 📶 Installing the environment with pip
+
+To set the environment, launch in the terminal the following command:
+
+```bash
+$ python -m pip install -r requirements.txt
 ```
 
 ## Module list 📝
@@ -46,3 +54,4 @@ $ conda activate performance_assessor
 | **pip:** mkdocs-material-extensions |   `1.3.1`   |
 | **pip:** mkdocstrings               |  `0.24.1`   |
 | **pip:** mkdocstrings-python        |   `1.9.0`   |
+
