@@ -60,7 +60,7 @@ $ python3 -m pip install .
 By doing:
 
 ```sh
-$ python -m src.main --help
+$ perfassess --help
 ```
 
 You will get the help to use the command line interface. Here are the used legends:
