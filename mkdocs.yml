@@ -37,6 +37,7 @@ theme:
     hljs_languages:
         - bash
         - python
+        - yaml
     font:
         text: Roboto Light
 
