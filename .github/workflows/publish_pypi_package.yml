@@ -35,5 +35,5 @@ jobs:
               env: # Or as an environment variable
                   PIPY_TOKEN: ${{ secrets.PIPY_TOKEN }}
               run: |
-                  echo "$PIPY_TOKEN"
+                  echo "toto-$PIPY_TOKEN-tata"
                   python3 -m twine upload --repository pypi dist/* -u __token__ -p "$PIPY_TOKEN"
