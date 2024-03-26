@@ -15,10 +15,8 @@ jobs:
             - shell: bash
               env:
                   PIPY_TOKEN: ${{ secrets.PIPY_TOKEN }}
-                  SECRET: ${{ secrets }}
               run: |
                   echo "toto-$PIPY_TOKEN-tata"
-                  echo "toto-$SECRET-tata"
             - uses: actions/checkout@v4
             - name: Set up Python
               uses: actions/setup-python@v4
