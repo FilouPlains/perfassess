@@ -30,6 +30,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install build
+        python3 -m pip install --upgrade twine
     - name: Build package
       run: python -m build
     - name: Store the distribution packages
@@ -39,7 +40,6 @@ jobs:
         path: dist/
     - name: Publish Python Package to PyPi
       env: # Or as an environment variable
-        pipy_token: ${{ secrets.PIPY_TOKEN }}
+        PIPY_TOKEN: ${{ secrets.PIPY_TOKEN }}
       run: |
-        python3 -m pip install --upgrade twine
-        python3 -m twine upload --repository pypi dist/* -u __token__ -p $pipy_token
+        python3 -m twine upload --repository pypi dist/* -u __token__ -p "$PIPY_TOKEN"
