@@ -38,6 +38,8 @@ jobs:
         name: python-package-distributions
         path: dist/
     - name: Publish Python Package to PyPi
+      env: # Or as an environment variable
+        pipy_token: ${{ secrets.PIPY_TOKEN }}
       run: |
         python3 -m pip install --upgrade twine
-        python3 -m twine upload --repository pypi dist/* -u __token__ -p ${{ secrets.PIPY_TOKEN }}
+        python3 -m twine upload --repository pypi dist/* -u __token__ -p $pipy_token
