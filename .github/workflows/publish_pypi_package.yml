@@ -39,6 +39,5 @@ jobs:
               run: |
                   python3 -m pip install --upgrade twine
             - name: Publish Python package to PyPi
-              env: # Or as an environment variable
               run: |
                   python3 -m twine upload --repository pypi dist/* -u __token__ -p "$PIPY_TOKEN"
