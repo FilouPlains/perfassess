@@ -49,65 +49,68 @@ def define_argument(version: str = None) -> ArgumentParser:
     python. To use it, launch:
 
     \033[7m [[NORMAL USE]] \033[0m\n
-    $ python -m src.main \\
-             -s script.py \\
-             -f function_name \\
-             -o output_directory/ \\
-             -a argument.yml
-    
-    \033[7m [[PACKAGE USE]] \033[0m\n
-    
-    If you use this module to test another or, in another words, a package, the
-    usage is a bit different. If you have no "subpackage", you have to launch,
-    for this kind of tree structure:
-    
-    ./package/
-    └── src/
-        ├── __init__.py
-        └── script.py
-    
-    The next command, if you are in "./package", in order to evaluate
-    "script.py":
-    
-    $ python -m src.main \\
-             -s src/script.py \\
-             -f function_name \\
-             -o output_directory/ \\
-             --package src/__init__.py \\
-             -a argument.yml
 
-    \033[7m [[SUBPACKAGE USE]] \033[0m\n
-    
-    If you use this module to test another or, in another words, a package, the
-    usage is a bit different. If you have to test a "subpackage", you have to
-    launch, for this kind of tree structure:
-    
-    ./package/
-    └── src/
-        ├── __init__.py
-        └── subpackage/
+        $ perfassess -s script.py \\
+                     -f function_name \\
+                     -o output_directory/ \\
+                     -a argument.yml
+
+    You can actually directly test the program in the repository root
+    (perfassess/) using:
+
+        $ perfassess -s src/perfassess/testor.py \\
+                     -f testor \\
+                     -a data/argument.yml \\
+                     -o data/
+
+    \033[7m [[PACKAGE USE]] \033[0m\n
+    Let us say that you want to test a package, which should have this kind of
+    tree structure:
+
+        package/
+        └── src/
             ├── __init__.py
             └── script.py
-    
-    The next command, if you are in "./package", in order to evaluate
-    "script.py":
-    
-    $ python -m src.main \\
-             -s src/subpackage/script.py \\
-             -f function_name \\
-             -o output_directory/ \\
-             --package src/__init__.py \\
-             --subpackage src/subpackage/__init__.py \\
-             -a argument.yml
 
-    \033[7m [[PARAMETERS DESCRIPTION]] \033[0m\n
+    In package, you can use relative paths. But with these, the "normal use"
+    method do not work. Instead, use the next command, if you are in package/,
+    in order to evaluate script.py:
 
-    Legend:
-        - int: Integer.
-        - str: String.
-        - [type|value]: Type of the input required, follow by the default
-                        value. So if this optional arguments is not used,
-                        "value" will be chosen.
+        $ perfassess -s src/script.py \\
+                     -f function_name \\
+                     -o output_directory/ \\
+                     --package src/__init__.py \\
+                     -a argument.yml
+
+    In addition of the previous "normal use" method, you have to indicate a
+    __init__.py file.
+
+    \033[7m [[SUBACKAGE USE]] \033[0m\n
+    Let us say that you want to test a subpackage, which should have this kind
+    of tree structure:
+
+        ./package/
+        └── src/
+            ├── __init__.py
+            └── subpackage/
+                ├── __init__.py
+                └── script.py
+
+    In subpackage, you can use relative paths. But with these, the "normal use"
+    method do not work. But the "package use" also do not work. Instead, use
+    the next command, if you are in package/, in order to evaluate script.py:
+
+        $ perfassess -s src/subpackage/script.py \\
+                     -f function_name \\
+                     -o output_directory/ \\
+                     --package src/__init__.py \\
+                     --subpackage src/subpackage/__init__.py \\
+                     -a argument.yml
+
+    In addition of the previous "normal use" and "package use" method, you have
+    to indicate two __init__.py files. The first one is the top package
+    __init__.py file. The second one is the __init__.py file of the subpackage
+    to test.
     """
 
     # ===================

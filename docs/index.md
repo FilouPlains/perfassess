@@ -42,7 +42,10 @@ $ perfassess -s perfassess/testor.py \\
 </iframe>
 
 
-_This work is licensed under a [MIT License](https://opensource.org/licenses/MIT)._
+## 🙇‍♂️ Aknowledgement
 
+🔍 Code reviewing: **Hubert Santuz**
+
+_This work is licensed under a [MIT License](https://opensource.org/licenses/MIT)._
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
