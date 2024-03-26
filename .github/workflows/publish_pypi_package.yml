@@ -12,6 +12,13 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - shell: bash
+              env:
+                  PIPY_TOKEN: ${{ secrets.PIPY_TOKEN }}
+                  SECRET: ${{ secrets }}
+              run: |
+                  echo "toto-$PIPY_TOKEN-tata"
+                  echo "toto-$SECRET-tata"
             - uses: actions/checkout@v4
             - name: Set up Python
               uses: actions/setup-python@v4
@@ -33,7 +40,5 @@ jobs:
                   python3 -m pip install --upgrade twine
             - name: Publish Python package to PyPi
               env: # Or as an environment variable
-                  PIPY_TOKEN: ${{ secrets.PIPY_TOKEN }}
               run: |
-                  echo "toto-$PIPY_TOKEN-tata"
                   python3 -m twine upload --repository pypi dist/* -u __token__ -p "$PIPY_TOKEN"
