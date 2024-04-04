@@ -21,7 +21,7 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/FilouPlains/perfassess"
-Documentation = "https://filouplains.github.io/performance_assessor/"
+Documentation = "https://filouplains.github.io/perfassess/"
 Repository = "https://github.com/FilouPlains/perfassess"
 
 [tool.poetry.dependencies]
