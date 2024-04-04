@@ -179,7 +179,7 @@ In addition of the previous “normal use” and “package use” method, you h
 toto: 10
 ```
 
-- **\*\* =** In memory usage, tested functions are going to be named something like `/home/user/Documents/program/package/script.py`. To shorten the name, use the `--n_field` tag. For instance, giving 2 will let know to the program that you want to only keep the last to field, which in the end will look something like: `package/script.py`.
+- **\*\* =** In memory usage, tested functions are going to be named something like `/home/user/Documents/program/package/script.py`. To shorten the name, use the `--n_field` tag. For instance, giving 2 will let know to the program that you want to only keep the last two field, which in the end will look something like: `package/script.py`.
 
 ## 🙇‍♂️ Aknowledgement
 
