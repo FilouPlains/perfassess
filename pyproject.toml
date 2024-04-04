@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "perfassess"
-version = "0.0.1"
+version = "0.0.2"
 description = "Access the performance of a given function and create plot."
 authors = [{ name = "Lucas ROUAUD", email = "lucas.rouaud@gmail.com" }]
 maintainers = [{ name = "Lucas ROUAUD", email = "lucas.rouaud@gmail.com" }]
