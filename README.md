@@ -25,7 +25,14 @@ To run this software, you will need `python ≥ 3.10` and this next module:
 
 ## ⚙️ Installation
 
-### 👬 Cloning the repository
+### 🥹 EZ way
+
+```bash
+$ pip install perfassess
+```
+
+### 😩 From source
+#### 👬 Cloning the repository
 
 You can clone the repository using `HTTPS`:
 
@@ -47,7 +54,7 @@ $ cd perfassess
 
 **All next commands are assuming that you are in the `📁 perfassess/` directory. This directory will be name as `📁 ./`.**
 
-### 🐍📦 Installing with pip
+#### 🐍📦 Installing with pip
 
 Simply launch this command in the `📁 ./` directory:
 
