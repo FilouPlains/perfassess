@@ -156,15 +156,15 @@ In addition of the previous “normal use” and “package use” method, you h
 
 | **Argument**             | **Mandatory?** | **Type and usage**                  | **Description**                                    |
 | :----------------------- | :------------: | :---------------------------------- | :------------------------------------------------- |
-| **`-s` or `--script`**   |      Yes       | `-s script.py`                      | The script that contain the function to test.      |
-| **`-o` or `--output`**   |      Yes       | `-o output_directory/`              | The directory where the plot have to be produced.  |
-| **`-f` or `--function`** |       No       | `-f main`                           | The function to test.                              |
-| **`-a` or `--argument`** |       No       | `-a argument.yml`                   | The argument to passe to the function to test*.    |
+| **`-s`<br>`--script`**   |      Yes       | `-s script.py`                      | The script that contain the function to test.      |
+| **`-o`<br>`--output`**   |      Yes       | `-o output_directory/`              | The directory where the plot have to be produced.  |
+| **`-f`<br>`--function`** |       No       | `-f main`                           | The function to test.                              |
+| **`-a`<br>`--argument`** |       No       | `-a argument.yml`                   | The argument to passe to the function to test*.    |
 | **`--n_field`**          |       No       | `-n_field 2`                        | The number of field to keep**.                     |
 | **`--package`**          |       No       | `--package package/__init__.py`     | The `__init__.py` file of the top package to test. |
 | **`--subpackage`**       |       No       | `-o package/subpackage/__init__.py` | The `__init__.py` file of the subpackage to test.  |
-| **`-h` or `--help`**     |       No       | Flag                                | Display the help and exit the program.             |
-| **`-v` or `--version`**  |       No       | Flag                                | Display the version and exit the program.          |
+| **`-h`<br>`--help`**     |       No       | Flag                                | Display the help and exit the program.             |
+| **`-v`<br>`--version`**  |       No       | Flag                                | Display the version and exit the program.          |
 
 - **\* =** If you want to test a function that requires arguments, you can give to the command line interface a `argument.yml` file that contains all required arguments. If the tested function requires an argument like `toto`, you can put in the YAML file:
 
