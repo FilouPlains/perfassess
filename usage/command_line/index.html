@@ -1,0 +1,994 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../installation/">
+      
+      
+        <link rel="next" href="../module/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Command line - performance_assessor</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Light:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto Light";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../style.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-command-line" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="performance_assessor" class="md-header__button md-logo" aria-label="performance_assessor" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            performance_assessor
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Command line
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/FilouPlains/performance_assessor" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="performance_assessor" class="md-nav__button md-logo" aria-label="performance_assessor" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    performance_assessor
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/FilouPlains/performance_assessor" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Command line
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Command line
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✏️ General note
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normal-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Normal use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Package use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subpackage-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂 Subpackage use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-possible-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Describing possible parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml-file-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗒 YAML file example
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Code documentation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Code documentation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    parse_argument
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            parse_argument
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/parse_argument/check_argument/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    check_argument.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/parse_argument/define_argument/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    define_argument.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/parse_argument/parse_argument/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    parse_argument.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/class_performance_assessor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    class_performance_assessor.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/main/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    main.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code_documentation/testor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    testor.py
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#general-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✏️ General note
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normal-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      📄 Normal use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Package use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#subpackage-use" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗂 Subpackage use
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-possible-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Describing possible parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml-file-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      🗒 YAML file example
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="using-command-line">⌨️ Using command line</h1>
+<h2 id="general-note">✏️ General note</h2>
+<p>By doing:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>--help
+</code></pre></div>
+<p>You will get the help to use the command line interface. Here are the used legends:</p>
+<ul>
+<li><strong><code>int</code>:</strong> Integer.</li>
+<li><strong><code>str</code>:</strong> String.</li>
+<li><strong><code>[type|value]</code>:</strong> Type of the input required, follow by the default value. So if this optional arguments is not used, “value” will be chosen.</li>
+</ul>
+<blockquote>
+<p>⚠️ If you use <code>pickle</code>, the command line interface will not work!</p>
+</blockquote>
+<h2 id="normal-use">📄 Normal use</h2>
+<p>To use th program, launch:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>script.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>function_name<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>output_directory/<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-a<span class="w"> </span>argument.yml
+</code></pre></div>
+<p>You can actually directly test the program in the repository root (<code>📁 perfassess/</code>) using:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>src/perfassess/testor.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>testor
+<span class="w">             </span>-a<span class="w"> </span>data/argument.yml<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>data/
+</code></pre></div>
+<h2 id="package-use">📁 Package use</h2>
+<p>Let us say that you want to test a package, which should have this kind of tree structure:</p>
+<div class="highlight"><pre><span></span><code>package/
+└──<span class="w"> </span>src/
+<span class="w">    </span>├──<span class="w"> </span>__init__.py
+<span class="w">    </span>└──<span class="w"> </span>script.py
+</code></pre></div>
+<p>In package, you can use relative paths. But with these, the “normal use” method do not work. Instead, use the next command, if you are in <code>📁 package/</code>, in order to evaluate <code>script.py</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>src/script.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>function_name<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>output_directory/<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>--package<span class="w"> </span>src/__init__.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-a<span class="w"> </span>argument.yml
+</code></pre></div>
+<p>In addition of the previous "normal use" method, you have to indicate a <code>__init__.py</code> file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Packages are identify with <code>__init__.py</code> files and allow relatives import.</p>
+</div>
+<h2 id="subpackage-use">🗂 Subpackage use</h2>
+<p>Let us say that you want to test a subpackage, which should have this kind of tree structure:</p>
+<div class="highlight"><pre><span></span><code>./package/
+└──<span class="w"> </span>src/
+<span class="w">    </span>├──<span class="w"> </span>__init__.py
+<span class="w">    </span>└──<span class="w"> </span>subpackage/
+<span class="w">        </span>├──<span class="w"> </span>__init__.py
+<span class="w">        </span>└──<span class="w"> </span>script.py
+</code></pre></div>
+<p>In subpackage, you can use relative paths. But with these, the “normal use” method do not work. But the “package use” also do not work. Instead, use the next command, if you are in <code>📁 package/</code>, in order to evaluate <code>script.py</code>:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>src/subpackage/script.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>function_name<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>output_directory/<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>--package<span class="w"> </span>src/__init__.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>--subpackage<span class="w"> </span>src/subpackage/__init__.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-a<span class="w"> </span>argument.yml
+</code></pre></div>
+<p>In addition of the previous “normal use” and “package use” method, you have to indicate two <code>__init__.py</code> files. The first one is the top package <code>__init__.py</code> file. The second one is the <code>__init__.py</code> file of the subpackage to test.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Packages are identify with <code>__init__.py</code> files and allow relatives import.</p>
+</div>
+<h2 id="describing-possible-parameters">🔍 Describing possible parameters</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong>Argument</strong></th>
+<th style="text-align: center;"><strong>Mandatory?</strong></th>
+<th style="text-align: left;"><strong>Type and usage</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>-s</code><br><code>--script</code></strong></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;"><code>-s script.py</code></td>
+<td style="text-align: left;">The script that contain the function to test.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>-o</code><br><code>--output</code></strong></td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: left;"><code>-o output_directory/</code></td>
+<td style="text-align: left;">The directory where the plot have to be produced.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>-f</code><br><code>--function</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;"><code>-f main</code></td>
+<td style="text-align: left;">The function to test.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>-a</code><br><code>--argument</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;"><code>-a argument.yml</code></td>
+<td style="text-align: left;">The argument to passe to the function to test*.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>--n_field</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;"><code>-n_field 2</code></td>
+<td style="text-align: left;">The number of field to keep**.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>--package</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;"><code>--package package/__init__.py</code></td>
+<td style="text-align: left;">The <code>__init__.py</code> file of the top package to test.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>--subpackage</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;"><code>-o package/subpackage/__init__.py</code></td>
+<td style="text-align: left;">The <code>__init__.py</code> file of the subpackage to test.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>-h</code><br><code>--help</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Flag</td>
+<td style="text-align: left;">Display the help and exit the program.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>-v</code><br><code>--version</code></strong></td>
+<td style="text-align: center;">No</td>
+<td style="text-align: left;">Flag</td>
+<td style="text-align: left;">Display the version and exit the program.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>* =</strong> If you want to test a function that requires arguments, you can give to the command line interface a <code>argument.yml</code> file that contains all required arguments. If the tested function requires an argument like <code>toto</code>, you can put in the YAML file:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>toto: 10
+</code></pre></div>
+<ul>
+<li><strong>** =</strong> In memory usage, tested functions are going to be named something like <code>/home/user/Documents/program/package/script.py</code>. To shorten the name, use the <code>--n_field</code> tag. For instance, giving 2 will let know to the program that you want to only keep the last two field, which in the end will look something like: <code>package/script.py</code>.</li>
+</ul>
+<h2 id="yaml-file-example">🗒 YAML file example</h2>
+<p>For the next python function, <a href="../../code_documentation/testor/">describe here</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">testor</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">to_add</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A function to launch the program in order to test it.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    value : `list`</span>
+<span class="sd">        A list of values.</span>
+
+<span class="sd">    to_add : `int`, optional</span>
+<span class="sd">        An optional argument to test them. By default 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">value_i</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+        <span class="n">to_add</span> <span class="o">+=</span> <span class="n">value_i</span>
+</code></pre></div>
+<p>You can see that the function have:</p>
+<ul>
+<li><strong>An mandatory argument <code>value</code>:</strong> it is a list of value.</li>
+<li><strong>An optional argument <code>to_add</code>:</strong> it is an integer with the default value of 1.</li>
+</ul>
+<p>That means that you need a way to provide the arguments to the function when you are going to use the command line interface. The chosen method is a YAML file. An example of a file, <a href="https://github.com/FilouPlains/perfassess/blob/main/data/argument.yml">available here in the GitHub repository</a>, is the following:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>That means that, when launching the command line, you are going to give to value a list that look like this: <code>[1, 2, 3]</code>. Translate in python code, it would be something like:</p>
+<div class="highlight"><pre><span></span><code><span class="n">testor</span><span class="p">(</span><span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+</code></pre></div>
+<p>As you can see, only the mandatory argument is given. You do not need to specify anything for the optional ones. If you want to, an other example of YAML file could look to something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">3</span><span class="p p-Indicator">]</span>
+<span class="nt">to_add</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+</code></pre></div>
+<p>To finish, you can actually directly test the program in the repository root (<code>📁 perfassess/</code>) using:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>src/perfassess/testor.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>testor<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-a<span class="w"> </span>data/argument.yml<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>data/
+</code></pre></div>
+<p>Which is an example of launching the command giving arguments to the function <code>testor()</code> with a YAML file. If you function do not need any arguments, then the command could look to something like this:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>perfassess<span class="w"> </span>-s<span class="w"> </span>src/perfassess/testor.py<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-f<span class="w"> </span>testor<span class="w"> </span><span class="se">\\</span>
+<span class="w">             </span>-o<span class="w"> </span>data/
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the background, <code>pyyaml</code> is used to parse the file and translate it into a dictionary. Then, we can pass it to the wanted function using <code>**kwargs</code> python unpacking “method”.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>
