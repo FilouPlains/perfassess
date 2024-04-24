@@ -38,7 +38,7 @@ With "output_directory/" being the output directory of your choice
 
 __authors__ = ["Lucas ROUAUD"]
 __contact__ = ["lucas.rouaud@gmail.com"]
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __date__ = "22/03/2024"
 __copyright__ = "MIT License"
 

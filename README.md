@@ -2,10 +2,9 @@
 
 # ⌛️ PERFASSESS 💾
 
-[![Python 3.10.8](https://img.shields.io/badge/python-%E2%89%A5_3.11.5-blue.svg)](https://www.python.org/downloads/release/python-397/)
-[![Conda 22.11.1](https://img.shields.io/badge/miniconda-%E2%89%A5_23.11.0-green.svg)](https://docs.conda.io/en/latest/miniconda.html)
+[![Python 3.11](https://img.shields.io/badge/python-%E2%89%A5_3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
+[![pip 24.0](https://img.shields.io/badge/pip-%E2%89%A5_24.0-green.svg)](https://pip.pypa.io/en/latest/installation/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 
 ✍ Contributor: **Lucas ROUAUD**
 
@@ -13,11 +12,11 @@
 
 ## 📒 Description
 
-**This module permit to evaluate the performance of a given function and create Plotly bar plot.**
+**This module permit to evaluate the performance of a given function and create Plotly bar plot. Check the documentation at [https://filouplains.github.io/perfassess/](https://filouplains.github.io/perfassess/).**
 
 ## 🗄 Dependencies
 
-To run this software, you will need `python ≥ 3.10` and this next module:
+To run this software, you will need `python ≥ 3.11` and this next module:
 
 - `numpy ≥ 1.26.0`
 - `plotly ≥ 5.19.0`
@@ -26,6 +25,14 @@ To run this software, you will need `python ≥ 3.10` and this next module:
 ## ⚙️ Installation
 
 ### 🥹 EZ way
+
+Recommended method:
+
+```bash
+$ pipx install perfassess
+```
+
+If you do not have pipx installed, check out the documentation at [https://pipx.pypa.io/stable/installation/](https://pipx.pypa.io/stable/installation/). Else, classical installation method:
 
 ```bash
 $ pip install perfassess

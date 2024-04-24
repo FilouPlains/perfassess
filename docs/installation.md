@@ -2,6 +2,14 @@
 
 ## 🥹 EZ way
 
+Recommended method:
+
+```bash
+$ pipx install perfassess
+```
+
+If you do not have pipx installed, check out the documentation at [https://pipx.pypa.io/stable/installation/](https://pipx.pypa.io/stable/installation/). Else, classical installation method:
+
 ```bash
 $ pip install perfassess
 ```
